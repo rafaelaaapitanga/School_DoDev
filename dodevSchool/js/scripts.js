@@ -3,32 +3,60 @@
 ////////////////////////////////////////////////////////////////////////
 
 class Aluno {
-  
+  Nome
+  Idade
+  Nota 
+  constructor(nome, idade, nota) {
+    this.Nome = nome
+    this.Idade = idade
+    this.Nota = nota
+  }
 }
 
 // Array
-
+let arrayAlunos = [];
 
 //funções projeto
 
-function CadastrarAluno() {
-  
+function CadastrarAluno(nome, idade, nota, array) {
+  let novo_aluno = new Aluno(nome, idade, nota)
+  if (!array.some(x => x.Nome == nome))
+    array.push(novo_aluno)
+  return novo_aluno
 }
 
-function OrdenarPorNota() {
- 
+function OrdenarPorNota(array) {
+  array.sort((alunoA, alunoB) => alunoB.Nota - alunoA.Nota);
+  return array;
 }
 
-function OrdenarPorIdade() {
-
+function OrdenarPorIdade(array) {
+  array.sort((alunoA, alunoB) => alunoB.Idade - alunoA.Idade);
+  return array;
 }
 
-function OrdenarPorNome() {
-
+function OrdenarPorNome(array) {
+  array.sort((alunoA, alunoB) => {
+    if (alunoA.Nome < alunoB.Nome) {
+      return -1; // alunoA antes do alunoB
+    } else if (alunoA.Nome > alunoB.Nome) {
+      return 1; // alunoA depois do alunoB
+    } else {
+      return 0; // nomes iguais, não muda a ordem
+    }
+  })
+  return array;
 }
 
-function CalcularMedia(){
+function CalcularMedia(array){
 
+  if (array.length === 0) {
+    return 0; // evitar divisão por zero
+  }
+
+  const somaNotas = array.reduce((soma, aluno) => soma + Number(aluno.Nota), 0); // converter p número antes de somar / 0: valor inicial
+  const media = somaNotas / array.length;
+  return media;
 }
 
 ////////////////////////////////////////////////////////////////////////
